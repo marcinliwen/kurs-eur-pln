@@ -84,7 +84,7 @@ export default function CurrencyCard() {
 
       <Card className="border-0 shadow-xl bg-gradient-to-br from-indigo-600 to-violet-700 text-white overflow-hidden relative">
         <div className="absolute top-0 right-0 p-32 bg-white opacity-5 rounded-full transform translate-x-10 -translate-y-10"></div>
-        <CardContent className="p-8 flex flex-col items-center justify-center min-h-[240px] space-y-2 relative z-10">
+        <CardContent className="p-8 flex flex-col items-center justify-center min-h-[140px] space-y-2 relative z-10">
           {isLoading ? (
             <div className="space-y-4 w-full flex flex-col items-center">
                <Skeleton className="h-16 w-48 bg-white/20" />
@@ -145,7 +145,7 @@ export default function CurrencyCard() {
           
           <div className="flex-1 space-y-2 min-w-[140px]">
             <label className="text-xs text-stone-400 font-medium ml-1">Wynik PLN</label>
-            <div className="h-20 bg-indigo-600 rounded-2xl shadow-inner flex items-center px-4 justify-between relative overflow-hidden ring-4 ring-indigo-50 transition-all">
+            <div className="h-16 bg-indigo-600 rounded-2xl shadow-inner flex items-center px-4 justify-between relative overflow-hidden ring-4 ring-indigo-50 transition-all">
                <span className="text-4xl font-black text-white truncate pr-10 tracking-tight">
                  {amount && rate ? (parseFloat(amount) * rate).toFixed(2) : '0.00'}
                </span>

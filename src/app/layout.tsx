@@ -18,16 +18,16 @@ export default function RootLayout({
         <Providers>
           <div className="min-h-screen bg-stone-50 text-stone-900 font-sans selection:bg-indigo-100 selection:text-indigo-900">
             <div className="max-w-md lg:max-w-3/4 xl:max-w-1/2 mx-auto min-h-screen bg-white shadow-2xl overflow-hidden relative flex flex-col">
-              {/* Status Bar Area simulation */}
-              <div className="h-12 w-full bg-white z-10"></div>
+              
               
               <main className="flex-1 flex flex-col px-6 py-8">
                 {children}
-              </main>
-              
-              <div className="py-6 text-center text-xs text-stone-400">
+                <div className="pt-6 text-center text-xs text-stone-400">
                 Dane dostarcza NBP
               </div>
+              </main>
+              
+              
             </div>
           </div>
         </Providers>
