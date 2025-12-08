@@ -18,6 +18,8 @@ export default function CurrencyCard() {
   const [isInverse, setIsInverse] = React.useState(false);
   const [amount, setAmount] = React.useState('');
   const [history, setHistory] = React.useState<HistoryEntry[]>([]);
+  const [calcInverse, setCalcInverse] = React.useState(false);
+  const [plnAmount, setPlnAmount] = React.useState('');
 
   const fetchRate = async () => {
     const response = await fetch('https://api.nbp.pl/api/exchangerates/rates/A/EUR/last?format=json');
@@ -111,11 +113,68 @@ export default function CurrencyCard() {
       </Card>
 
       <div className="bg-white p-6 rounded-3xl shadow-lg border border-stone-100 space-y-4">
-        <div className="flex items-center gap-2 text-stone-500 mb-2">
+        <div className='flex justify-between'>
+            <div className="flex items-center gap-2 text-stone-500 mb-2">
           <Calculator className="w-4 h-4" />
           <span className="text-sm font-medium uppercase tracking-wide">Kalkulator</span>
         </div>
+        <Button
+            variant="outline"
+            size="icon"
+            className="rounded-full border-stone-200 hover:bg-stone-100"
+            onClick={()=>{setCalcInverse(!calcInverse), setPlnAmount(''), setAmount('')}}
+        >
+            <ArrowLeftRight className="w-4 h-4 text-stone-600" />
+        </Button>
+        </div>
         
+        {calcInverse ?
+        <div className="flex items-center gap-2 sm:gap-4 flex-wrap sm:flex-nowrap">
+          <div className="flex-1 space-y-1 min-w-[140px]">
+            <label className="text-xs text-stone-400 font-medium ml-1">Kwota PLN</label>
+            <div className="relative">
+              <Input 
+                type="number" 
+                placeholder="0"
+                value={plnAmount}
+                onChange={(e) => setPlnAmount(e.target.value)}
+                className="text-xl font-bold h-12 pl-3 pr-20 bg-stone-50 border-stone-200 focus-visible:ring-indigo-500 w-full"
+              />
+              <div className="absolute right-3 top-0 h-full flex items-center gap-1">
+                  {plnAmount && (
+                    <button 
+                        onClick={() => setPlnAmount('')}
+                        className="p-1 rounded-full hover:bg-stone-200 text-stone-400 transition-colors"
+                    >
+                        <X className="w-3 h-3" />
+                    </button>
+                  )}
+                  <span className="text-sm font-bold text-stone-400 w-6 text-center">PLN</span>
+              </div>
+            </div>
+          </div>
+          
+          <ArrowRight className="w-5 h-5 text-stone-300 mt-6" />
+          
+          <div className="flex-1 space-y-2 min-w-[140px]">
+            <label className="text-xs text-stone-400 font-medium ml-1">Wynik EUR</label>
+            <div className="h-16 bg-indigo-600 rounded-2xl shadow-inner flex items-center px-4 justify-between relative overflow-hidden ring-4 ring-indigo-50 transition-all">
+               <span className="text-4xl font-black text-white truncate pr-10 tracking-tight">
+                 {plnAmount && rate ? (parseFloat(plnAmount) / rate).toFixed(2) : '0.00'}
+               </span>
+               <span className="text-xl font-bold text-indigo-200 absolute right-4">€</span>
+            </div>
+          </div>
+          
+          {/* <Button 
+            onClick={addToHistory}
+            disabled={!amount}
+            size="icon"
+            className="mt-6 h-12 w-12 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shrink-0"
+          >
+            <Plus className="w-6 h-6" />
+          </Button> */}
+        </div> :
         <div className="flex items-center gap-2 sm:gap-4 flex-wrap sm:flex-nowrap">
           <div className="flex-1 space-y-1 min-w-[140px]">
             <label className="text-xs text-stone-400 font-medium ml-1">Kwota EUR</label>
@@ -153,16 +212,16 @@ export default function CurrencyCard() {
             </div>
           </div>
           
-          <Button 
+          {/* <Button 
             onClick={addToHistory}
             disabled={!amount}
             size="icon"
             className="mt-6 h-12 w-12 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white shadow-sm shrink-0"
           >
             <Plus className="w-6 h-6" />
-          </Button>
+          </Button> */}
         </div>
-
+}
         {history.length > 0 && (
             <div className="pt-4 border-t border-stone-100">
                 <div className="flex items-center gap-2 text-stone-400 mb-3">
