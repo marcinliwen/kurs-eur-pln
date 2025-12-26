@@ -18,7 +18,9 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#6366f1" />
         <link rel="apple-touch-icon" href="/icons/icon-192.svg" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="mask-icon" href="/icons/mask-icon.svg" color="#6366f1" />
+        <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body>
         <Providers>
